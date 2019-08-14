@@ -24,21 +24,23 @@
       </van-grid>
     </div>
 
-    <div class="main">
-      <div class="main_box">
-        <div class="img_box">
-          <img src="https://picsum.photos/355/200" alt="">
-        </div>
-        <div class="content">
-          <div class="words">
-            <span>10件起购</span>
-            <span>介绍介绍介绍介绍介绍介绍介绍介绍</span>
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+      <div class="main">
+        <div class="main_box">
+          <div class="img_box">
+            <img src="https://picsum.photos/355/200" alt="">
           </div>
-          <div class="price"></div>
+          <div class="content">
+            <div class="words">
+              <span>10件起购</span>
+              <span>介绍介绍介绍介绍介绍介绍介绍介绍</span>
+            </div>
+            <div class="price"></div>
+          </div>
+          <div class="buy_icon"></div>
         </div>
-        <div class="buy_icon"></div>
       </div>
-    </div>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -47,6 +49,7 @@ export default {
   data () {
     return {
       value: '',
+      isLoading: false,
       tabsContent: [
         { icon: './assets/images/首页_03.png', title: '智合聚惠'},
         { icon: './assets/images/首页_08.png', title: '智合商品'},
@@ -57,6 +60,14 @@ export default {
         { icon: './assets/images/首页_19.png', title: '爱心传递'},
         { icon: './assets/images/首页_21.png', title: '关于我们'},
       ]
+    }
+  },
+  methods: {
+    onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+      }, 500);
     }
   }
 }
